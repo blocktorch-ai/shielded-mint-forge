@@ -8,6 +8,7 @@ import Logo from "@/components/Logo";
 import WalletConnect from "@/components/WalletConnect";
 import CollateralDial from "@/components/CollateralDial";
 import MintingInterface from "@/components/MintingInterface";
+import ContractInteraction from "@/components/ContractInteraction";
 
 const Vault = () => {
   const navigate = useNavigate();
@@ -101,12 +102,23 @@ const Vault = () => {
             />
           </div>
 
+          {/* Smart Contract Interaction */}
+          {isConnected && (
+            <div className="lg:col-span-3">
+              <ContractInteraction 
+                onTransactionSuccess={(txHash) => {
+                  console.log('Transaction successful:', txHash);
+                }}
+              />
+            </div>
+          )}
+
           {/* Process Status */}
           {isConnected && (
             <div className="lg:col-span-3">
               <Card className="p-6 bg-gradient-vault border-border shadow-card-vault">
                 <h3 className="text-lg font-semibold text-foreground mb-4">
-                  Minting Process Status
+                  FHE-Protected Minting Process
                 </h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -125,10 +137,8 @@ const Vault = () => {
                       <span className="text-xs font-bold text-primary-foreground">2</span>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-foreground">Set Collateral</p>
-                      <p className="text-xs text-muted-foreground">
-                        {collateralAmount > 0 ? "✓ Complete" : "Pending"}
-                      </p>
+                      <p className="text-sm font-medium text-foreground">FHE Encryption</p>
+                      <p className="text-xs text-muted-foreground">✓ Active</p>
                     </div>
                   </div>
                   
@@ -137,8 +147,8 @@ const Vault = () => {
                       <span className="text-xs font-bold text-accent-foreground">3</span>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-foreground">FHE Encryption</p>
-                      <p className="text-xs text-muted-foreground">✓ Active</p>
+                      <p className="text-sm font-medium text-foreground">Smart Contract</p>
+                      <p className="text-xs text-muted-foreground">✓ Deployed</p>
                     </div>
                   </div>
                   
@@ -147,7 +157,7 @@ const Vault = () => {
                       <span className="text-xs font-bold text-primary">4</span>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-foreground">Mint FUSD</p>
+                      <p className="text-sm font-medium text-foreground">Private Minting</p>
                       <p className="text-xs text-muted-foreground">Ready</p>
                     </div>
                   </div>
